@@ -99,6 +99,9 @@ public:
     void setEnabled(bool enable);
     void setModified(bool modified);
 
+    QString id () const;
+    void setId (const QString& text);
+
     void addSubProperty(QtProperty *property);
     void insertSubProperty(QtProperty *property, QtProperty *afterProperty);
     void removeSubProperty(QtProperty *property);

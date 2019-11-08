@@ -72,6 +72,8 @@ public:
     bool m_enabled;
     bool m_modified;
 
+    QString m_id;
+
     QtAbstractPropertyManager * const m_manager;
 };
 
@@ -397,6 +399,31 @@ void QtProperty::setModified(bool modified)
 
     d_ptr->m_modified = modified;
     propertyChanged();
+}
+
+/*!
+Returns the property's id.
+
+\sa setId()
+*/
+QString QtProperty::id () const
+{
+  return d_ptr->m_id;
+}
+
+/*!
+\fn void QtProperty::setId(const QString &text)
+
+Sets the property's  id to the given \a text.
+
+\sa id()
+*/
+void QtProperty::setId (const QString &text)
+{
+  if (d_ptr->m_id == text)
+    return;
+
+  d_ptr->m_id = text;
 }
 
 /*!
