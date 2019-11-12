@@ -4823,6 +4823,7 @@ public:
         int val;
         QStringList enumNames;
         QMap<int, QIcon> enumIcons;
+        QList<int> enumValues;
     };
 
     typedef QMap<const QtProperty *, Data> PropertyValueMap;
@@ -4933,6 +4934,16 @@ QStringList QtEnumPropertyManager::enumNames(const QtProperty *property) const
 QMap<int, QIcon> QtEnumPropertyManager::enumIcons(const QtProperty *property) const
 {
     return getData<QMap<int, QIcon> >(d_ptr->m_values, &QtEnumPropertyManagerPrivate::Data::enumIcons, property, QMap<int, QIcon>());
+}
+
+/*!
+    Returns the given \a property's map of enum values to their ids.
+
+    \sa enumValues(), setEnumValues()
+*/
+QList<int> QtEnumPropertyManager::enumValues (const QtProperty *property) const
+{
+  return getData<QList<int> > (d_ptr->m_values, &QtEnumPropertyManagerPrivate::Data::enumValues, property, QList<int> ());
 }
 
 /*!
@@ -5060,6 +5071,27 @@ void QtEnumPropertyManager::setEnumIcons(QtProperty *property, const QMap<int, Q
     emit enumIconsChanged(property, it.value().enumIcons);
 
     emit propertyChanged(property);
+}
+
+/*!
+    Sets the given \a property's map of enum values to their ids to \a
+    enumValues.
+
+    Each enum value can have associated id. This association is represented with passed \a enumValues map.
+
+    \sa enumValues(), enumValuesChanged()
+*/
+void QtEnumPropertyManager::setEnumValues (QtProperty *property, const QList<int> &enumValues)
+{
+  const QtEnumPropertyManagerPrivate::PropertyValueMap::iterator it = d_ptr->m_values.find (property);
+  if (it == d_ptr->m_values.end ())
+    return;
+
+  it.value ().enumValues = enumValues;
+
+  emit enumValuesChanged (property, it.value ().enumValues);
+
+  emit propertyChanged (property);
 }
 
 /*!

@@ -584,15 +584,18 @@ public:
 
     int value(const QtProperty *property) const;
     QStringList enumNames(const QtProperty *property) const;
+    QList<int> enumValues (const QtProperty *property) const;
     QMap<int, QIcon> enumIcons(const QtProperty *property) const;
 
 public Q_SLOTS:
     void setValue(QtProperty *property, int val);
     void setEnumNames(QtProperty *property, const QStringList &names);
+    void setEnumValues (QtProperty *property, const QList<int> &values);
     void setEnumIcons(QtProperty *property, const QMap<int, QIcon> &icons);
 Q_SIGNALS:
     void valueChanged(QtProperty *property, int val);
     void enumNamesChanged(QtProperty *property, const QStringList &names);
+    void enumValuesChanged (QtProperty *property, const QList<int> &values);
     void enumIconsChanged(QtProperty *property, const QMap<int, QIcon> &icons);
 protected:
     QString valueText(const QtProperty *property) const;
