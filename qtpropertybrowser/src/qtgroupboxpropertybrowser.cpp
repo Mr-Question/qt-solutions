@@ -263,12 +263,20 @@ void QtGroupBoxPropertyBrowserPrivate::propertyInserted(QtBrowserItem *index, Qt
 
     insertRow(layout, row);
     int span = 1;
+    int col  = 1;
+    if (index->property ()->propertyName ().isEmpty ())
+    {
+      span = 2;
+      col  = 0;
+    }
+
     if (newItem->widget)
-        layout->addWidget(newItem->widget, row, 1);
+      layout->addWidget (newItem->widget, row, col, 1, span);
     else if (newItem->widgetLabel)
-        layout->addWidget(newItem->widgetLabel, row, 1);
+      layout->addWidget (newItem->widgetLabel, row, col, 1, span);
     else
-        span = 2;
+      span = 2;
+
     layout->addWidget(newItem->label, row, 0, 1, span);
 
     m_itemToIndex[newItem] = index;
