@@ -77,14 +77,14 @@ public:
     QtIntPropertyManager(QObject *parent = 0);
     ~QtIntPropertyManager();
 
-    int value(const QtProperty *property) const;
+    virtual int value(const QtProperty *property) const;
     int minimum(const QtProperty *property) const;
     int maximum(const QtProperty *property) const;
     int singleStep(const QtProperty *property) const;
     bool isReadOnly(const QtProperty *property) const;
 
 public Q_SLOTS:
-    void setValue(QtProperty *property, int val);
+    virtual void setValue(QtProperty *property, int val);
     void setMinimum(QtProperty *property, int minVal);
     void setMaximum(QtProperty *property, int maxVal);
     void setRange(QtProperty *property, int minVal, int maxVal);
@@ -143,7 +143,7 @@ public:
     QtDoublePropertyManager(QObject *parent = 0);
     ~QtDoublePropertyManager();
 
-    double value(const QtProperty *property) const;
+    virtual double value(const QtProperty *property) const;
     double minimum(const QtProperty *property) const;
     double maximum(const QtProperty *property) const;
     double singleStep(const QtProperty *property) const;
@@ -151,7 +151,7 @@ public:
     bool isReadOnly(const QtProperty *property) const;
 
 public Q_SLOTS:
-    void setValue(QtProperty *property, double val);
+    virtual void setValue(QtProperty *property, double val);
     void setMinimum(QtProperty *property, double minVal);
     void setMaximum(QtProperty *property, double maxVal);
     void setRange(QtProperty *property, double minVal, double maxVal);
