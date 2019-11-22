@@ -219,7 +219,17 @@ void QtGroupBoxPropertyBrowserPrivate::propertyInserted(QtBrowserItem *index, Qt
                 if (hasHeader(par))
                     oldRow += 2;
             }
-            parentItem->groupBox = new QGroupBox(w);
+
+            parentItem->groupBox = qobject_cast<QGroupBox*>(parentItem->widget);
+            if (parentItem->groupBox)
+            {
+              parentItem->widget = 0;
+            }
+            else
+            {
+              parentItem->groupBox = new QGroupBox (w);
+            }
+
             parentItem->layout = new QGridLayout();
             parentItem->groupBox->setLayout(parentItem->layout);
             if (parentItem->label) {
