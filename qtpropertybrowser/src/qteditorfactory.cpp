@@ -1974,7 +1974,7 @@ void QtEnumEditorFactoryPrivate::slotEnumNamesChanged(QtProperty *property,
         const int nameCount = enumNames.count();
         for (int i = 0; i < nameCount; i++)
             editor->setItemIcon(i, enumIcons.value(i));
-        editor->setCurrentIndex(manager->value(property));
+        editor->setCurrentIndex(manager->QtEnumPropertyManager::value(property));
         editor->blockSignals(false);
     }
 }
@@ -1997,7 +1997,7 @@ void QtEnumEditorFactoryPrivate::slotEnumIconsChanged(QtProperty *property,
         const int nameCount = enumNames.count();
         for (int i = 0; i < nameCount; i++)
             editor->setItemIcon(i, enumIcons.value(i));
-        editor->setCurrentIndex(manager->value(property));
+        editor->setCurrentIndex(manager->QtEnumPropertyManager::value(property));
         editor->blockSignals(false);
     }
 }
@@ -2012,7 +2012,7 @@ void QtEnumEditorFactoryPrivate::slotSetValue(int value)
             QtEnumPropertyManager *manager = q_ptr->propertyManager(property);
             if (!manager)
                 return;
-            manager->setValue(property, value);
+            manager->QtEnumPropertyManager::setValue(property, value);
             return;
         }
 }
@@ -2077,7 +2077,7 @@ QWidget *QtEnumEditorFactory::createEditor(QtEnumPropertyManager *manager, QtPro
     const int enumNamesCount = enumNames.count();
     for (int i = 0; i < enumNamesCount; i++)
         editor->setItemIcon(i, enumIcons.value(i));
-    editor->setCurrentIndex(manager->value(property));
+    editor->setCurrentIndex(manager->QtEnumPropertyManager::value(property));
 
     connect(editor, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSetValue(int)));
     connect(editor, SIGNAL(destroyed(QObject *)),
