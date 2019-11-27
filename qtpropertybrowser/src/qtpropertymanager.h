@@ -582,12 +582,12 @@ public:
     QtEnumPropertyManager(QObject *parent = 0);
     ~QtEnumPropertyManager();
 
-    int value(const QtProperty *property) const;
+    virtual int value(const QtProperty *property) const;
     QStringList enumNames(const QtProperty *property) const;
     QMap<int, QIcon> enumIcons(const QtProperty *property) const;
 
 public Q_SLOTS:
-    void setValue(QtProperty *property, int val);
+    virtual void setValue(QtProperty *property, int val);
     void setEnumNames(QtProperty *property, const QStringList &names);
     void setEnumIcons(QtProperty *property, const QMap<int, QIcon> &icons);
 Q_SIGNALS:
