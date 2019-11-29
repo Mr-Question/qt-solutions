@@ -1863,10 +1863,12 @@ QtBrowserItem *QtAbstractPropertyBrowser::insertProperty(QtProperty *property,
         }
         pos++;
     }
+    this->setUpdatesEnabled (false);
     d_ptr->createBrowserIndexes(property, 0, afterProperty);
 
     // traverse inserted subtree and connect to manager's signals
     d_ptr->insertSubTree(property, 0);
+    this->setUpdatesEnabled (true);
 
     d_ptr->m_subItems.insert(newPos, property);
     //propertyInserted(property, 0, properAfterProperty);
