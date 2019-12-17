@@ -450,7 +450,7 @@ void QtGroupBoxPropertyBrowserPrivate::updateItem(WidgetItem *item)
         font.setUnderline(false);
         item->widgetLabel->setFont(font);
         item->widgetLabel->setText(property->valueText());
-        item->widgetLabel->setToolTip(property->valueText());
+        //item->widgetLabel->setToolTip(property->valueText());
         item->widgetLabel->setEnabled(property->isEnabled());
     }
     if (item->widget) {
@@ -458,7 +458,7 @@ void QtGroupBoxPropertyBrowserPrivate::updateItem(WidgetItem *item)
         font.setUnderline(false);
         item->widget->setFont(font);
         item->widget->setEnabled(property->isEnabled());
-        item->widget->setToolTip(property->valueText());
+        //item->widget->setToolTip(property->valueText());
     }
     //item->setIcon(1, property->valueIcon());
 }
