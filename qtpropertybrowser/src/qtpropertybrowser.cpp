@@ -197,6 +197,19 @@ QList<QtProperty *> QtProperty::subProperties() const
 }
 
 /*!
+Returns the set of parent properties.
+
+Note that subproperties are not owned by \e this property, but by
+the manager that created them.
+
+\sa insertSubProperty(), removeSubProperty()
+*/
+QSet<QtProperty *> QtProperty::parentProperties () const
+{
+  return d_ptr->m_parentItems;
+}
+
+/*!
     Returns a pointer to the manager that owns this property.
 */
 QtAbstractPropertyManager *QtProperty::propertyManager() const

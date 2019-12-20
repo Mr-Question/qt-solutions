@@ -77,6 +77,7 @@ public:
     virtual ~QtProperty();
 
     QList<QtProperty *> subProperties() const;
+    QSet<QtProperty *>  parentProperties () const;
 
     QtAbstractPropertyManager *propertyManager() const;
 

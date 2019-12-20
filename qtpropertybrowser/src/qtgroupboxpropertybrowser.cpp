@@ -75,7 +75,7 @@ public:
         QWidget *widget; // can be null
         QLabel *label;
         QLabel *widgetLabel;
-        QGroupBox *groupBox;
+        QWidget *groupBox;
         QGridLayout *layout;
         QFrame *line;
         WidgetItem *parent;
@@ -220,6 +220,7 @@ void QtGroupBoxPropertyBrowserPrivate::propertyInserted(QtBrowserItem *index, Qt
                     oldRow += 2;
             }
 
+            parentItem->layout = new QGridLayout();
             parentItem->groupBox = qobject_cast<QGroupBox*>(parentItem->widget);
             if (parentItem->groupBox)
             {
@@ -227,11 +228,19 @@ void QtGroupBoxPropertyBrowserPrivate::propertyInserted(QtBrowserItem *index, Qt
             }
             else
             {
-              parentItem->groupBox = new QGroupBox (w);
+              QtProperty *parent = m_itemToIndex[parentItem]->property ();
+              if (parent->parentProperties ().empty ())
+              {
+                parentItem->groupBox = new QWidget (w);
+                parentItem->layout->setContentsMargins (0, 0, 0, 0);
+              }
+              else
+              {
+                parentItem->groupBox = new QGroupBox (w);
+              }
             }
 
-            parentItem->layout = new QGridLayout();
-            parentItem->groupBox->setLayout(parentItem->layout);
+            parentItem->groupBox->setLayout (parentItem->layout);
             if (parentItem->label) {
                 l->removeWidget(parentItem->label);
                 delete parentItem->label;
@@ -429,7 +438,13 @@ void QtGroupBoxPropertyBrowserPrivate::updateItem(WidgetItem *item)
         QFont font = item->groupBox->font();
         font.setUnderline(property->isModified());
         item->groupBox->setFont(font);
-        item->groupBox->setTitle(property->propertyName());
+
+        QGroupBox* aGroupBoxWidget = qobject_cast<QGroupBox*> (item->groupBox);
+        if (aGroupBoxWidget != nullptr)
+        {
+          aGroupBoxWidget->setTitle (property->propertyName ());
+        }
+
         item->groupBox->setToolTip(property->toolTip());
         item->groupBox->setStatusTip(property->statusTip());
         item->groupBox->setWhatsThis(property->whatsThis());
