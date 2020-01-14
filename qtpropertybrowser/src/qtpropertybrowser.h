@@ -87,6 +87,8 @@ public:
     QString propertyName() const;
     bool isEnabled() const;
     bool isModified() const;
+    bool isRequest() const;
+    QString requestText() const;
 
     bool hasValue() const;
     QIcon valueIcon() const;
@@ -99,6 +101,8 @@ public:
     void setPropertyName(const QString &text);
     void setEnabled(bool enable);
     void setModified(bool modified);
+    void setRequest(bool request);
+    void setRequestText (const QString &text);
 
     void addSubProperty(QtProperty *property);
     void insertSubProperty(QtProperty *property, QtProperty *afterProperty);
@@ -132,6 +136,7 @@ Q_SIGNALS:
     void propertyChanged(QtProperty *property);
     void propertyRemoved(QtProperty *property, QtProperty *parent);
     void propertyDestroyed(QtProperty *property);
+    void propertyRequest(QtProperty *property);
 protected:
     virtual bool hasValue(const QtProperty *property) const;
     virtual QIcon valueIcon(const QtProperty *property) const;
