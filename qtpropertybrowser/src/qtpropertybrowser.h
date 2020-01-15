@@ -45,6 +45,7 @@
 #include <QWidget>
 #include <QSet>
 #include <QLineEdit>
+#include <QStandardItem>
 
 #if QT_VERSION >= 0x040400
 QT_BEGIN_NAMESPACE
@@ -88,12 +89,12 @@ public:
     bool isEnabled() const;
     bool isModified() const;
     bool isRequest() const;
-    QString requestText() const;
 
     bool hasValue() const;
     QIcon valueIcon() const;
     QString valueText() const;
     QString displayText() const;
+    const QStandardItem* request () const;
 
     void setToolTip(const QString &text);
     void setStatusTip(const QString &text);
@@ -101,8 +102,7 @@ public:
     void setPropertyName(const QString &text);
     void setEnabled(bool enable);
     void setModified(bool modified);
-    void setRequest(bool request);
-    void setRequestText (const QString &text);
+    void setRequest(QStandardItem* requestInfo);
 
     void addSubProperty(QtProperty *property);
     void insertSubProperty(QtProperty *property, QtProperty *afterProperty);

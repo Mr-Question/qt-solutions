@@ -69,10 +69,9 @@ public:
     QString m_statusTip;
     QString m_whatsThis;
     QString m_name;
-    QString m_requestText;
     bool m_enabled;
     bool m_modified;
-    bool m_request;
+    QSharedPointer<QStandardItem> m_request;
 
     QtAbstractPropertyManager * const m_manager;
 };
@@ -286,17 +285,7 @@ Returns whether the property is request.
 */
 bool QtProperty::isRequest () const
 {
-    return d_ptr->m_request;
-}
-
-/*!
-Returns request text.
-
-\sa setrequestText()
-*/
-QString QtProperty::requestText () const
-{
-    return d_ptr->m_requestText;
+    return (d_ptr->m_request != nullptr);
 }
 
 /*!
@@ -346,6 +335,16 @@ QString QtProperty::valueText() const
 QString QtProperty::displayText() const
 {
     return d_ptr->m_manager->displayText(this);
+}
+
+/*!
+Returns request value.
+
+\sa setrequestText()
+*/
+const QStandardItem* QtProperty::request () const
+{
+  return d_ptr->m_request.get();
 }
 
 /*!
@@ -439,28 +438,12 @@ Sets the property's request state according to the passed \a request value.
 
 \sa isRequest()
 */
-void QtProperty::setRequest (bool request)
+void QtProperty::setRequest (QStandardItem* request)
 {
     if (d_ptr->m_request == request)
         return;
 
-    d_ptr->m_request = request;
-    propertyChanged();
-}
-
-/*!
-\fn void QtProperty::setRequestText(const QString &text)
-
-Sets the property's request text to the given \a text.
-
-\sa requestText()
-*/
-void QtProperty::setRequestText (const QString &text)
-{
-    if (d_ptr->m_requestText == text)
-        return;
-
-    d_ptr->m_requestText = text;
+    d_ptr->m_request.reset (request);
     propertyChanged();
 }
 
