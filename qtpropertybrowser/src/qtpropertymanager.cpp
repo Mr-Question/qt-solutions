@@ -4988,8 +4988,8 @@ void QtEnumPropertyManager::setValue(QtProperty *property, int val)
     if (val >= data.enumNames.count())
         return;
 
-    if (val < 0 && data.enumNames.count() > 0)
-        return;
+    //if (val < 0 && data.enumNames.count() > 0)
+    //    return;
 
     if (val < 0)
         val = -1;
