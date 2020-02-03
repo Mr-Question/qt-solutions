@@ -183,6 +183,7 @@ protected:
     QWidget *createEditor(QtStringPropertyManager *manager, QtProperty *property,
                 QWidget *parent);
     void disconnectPropertyManager(QtStringPropertyManager *manager);
+    bool eventFilter(QObject *theObj, QEvent *theEvent) override;
 private:
     QtLineEditFactoryPrivate *d_ptr;
     Q_DECLARE_PRIVATE(QtLineEditFactory)

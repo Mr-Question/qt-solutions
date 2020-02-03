@@ -1141,6 +1141,7 @@ QWidget *QtLineEditFactory::createEditor(QtStringPropertyManager *manager,
         editor->setValidator(validator);
     }
     editor->setText(manager->value(property));
+    editor->installEventFilter(this);
 
     connect(editor, SIGNAL(editingFinished()),
                 this, SLOT(slotSetValue()));
@@ -1165,6 +1166,27 @@ void QtLineEditFactory::disconnectPropertyManager(QtStringPropertyManager *manag
     disconnect(manager, SIGNAL(readOnlyChanged(QtProperty*, bool)),
         this, SLOT(slotReadOnlyChanged(QtProperty *, bool)));
 
+}
+
+bool QtLineEditFactory::eventFilter(QObject *theObj, QEvent *theEvent)
+{
+  if (QLineEdit* anEditor = ::qobject_cast<QLineEdit*>(theObj))
+    if (theEvent->type() == QEvent::KeyPress)
+    {
+      QKeyEvent *aKeyEvent = dynamic_cast<QKeyEvent *>(theEvent);
+      if (aKeyEvent)
+      {
+        int aKey = aKeyEvent->key();
+        if (aKey == Qt::Key_Escape)
+        {
+          QtProperty *aProperty = d_ptr->m_editorToProperty[anEditor];
+          QtStringPropertyManager *aManager = propertyManager(aProperty);
+          anEditor->setText(aManager->value(aProperty));
+        }
+      }
+    }
+
+  return QtAbstractEditorFactory<QtStringPropertyManager>::eventFilter(theObj, theEvent);
 }
 
 // QtDateEditFactory
