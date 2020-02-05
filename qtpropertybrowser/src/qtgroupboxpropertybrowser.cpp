@@ -446,6 +446,7 @@ void QtGroupBoxPropertyBrowserPrivate::updateItem(WidgetItem *item)
         }
 
         item->groupBox->setToolTip(property->toolTip());
+        item->groupBox->setToolTipDuration (q_ptr->toolTipDuration());
         item->groupBox->setStatusTip(property->statusTip());
         item->groupBox->setWhatsThis(property->whatsThis());
         item->groupBox->setEnabled(property->isEnabled());
@@ -456,6 +457,7 @@ void QtGroupBoxPropertyBrowserPrivate::updateItem(WidgetItem *item)
         item->label->setFont(font);
         item->label->setText(property->propertyName());
         item->label->setToolTip(property->toolTip());
+        item->label->setToolTipDuration (q_ptr->toolTipDuration());
         item->label->setStatusTip(property->statusTip());
         item->label->setWhatsThis(property->whatsThis());
         item->label->setEnabled(property->isEnabled());
