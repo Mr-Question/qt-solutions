@@ -65,6 +65,8 @@ public:
     QSet<QtProperty *> m_parentItems;
     QList<QtProperty *> m_subItems;
 
+    QString m_id;
+
     QString m_toolTip;
     QString m_statusTip;
     QString m_whatsThis;
@@ -219,6 +221,16 @@ QtAbstractPropertyManager *QtProperty::propertyManager() const
 }
 
 /*!
+    Returns the property's identifier.
+
+    \sa setId()
+*/
+QString QtProperty::id() const
+{
+  return d_ptr->m_id;
+}
+
+/*!
     Returns the property's  tool tip.
 
     \sa setToolTip()
@@ -345,6 +357,21 @@ Returns request value.
 const QStandardItem* QtProperty::request () const
 {
   return d_ptr->m_request.get();
+}
+
+/*!
+    Sets the property's identifier to the given \a theId.
+
+    \sa id()
+*/
+void QtProperty::setId (const QString& theId)
+{
+  if (d_ptr->m_id == theId)
+  {
+    return;
+  }
+  d_ptr->m_id = theId;
+  propertyChanged();
 }
 
 /*!

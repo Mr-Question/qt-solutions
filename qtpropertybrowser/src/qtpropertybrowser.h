@@ -82,6 +82,8 @@ public:
 
     QtAbstractPropertyManager *propertyManager() const;
 
+    QString id() const;
+
     QString toolTip() const;
     QString statusTip() const;
     QString whatsThis() const;
@@ -95,6 +97,8 @@ public:
     QString valueText() const;
     QString displayText() const;
     const QStandardItem* request () const;
+
+    void setId (const QString& theId);
 
     void setToolTip(const QString &text);
     void setStatusTip(const QString &text);
