@@ -268,9 +268,14 @@ void QtGroupBoxPropertyBrowserPrivate::propertyInserted(QtBrowserItem *index, Qt
         parentWidget = parentItem->groupBox;
     }
 
-    newItem->label = new QLabel(parentWidget);
-    newItem->label->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
     newItem->widget = createEditor(index->property(), parentWidget);
+
+    if (index->property()->isPropertyNameVisible())
+    {
+      newItem->label = new QLabel(parentWidget);
+      newItem->label->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+    }
+   
     if (!newItem->widget) {
         newItem->widgetLabel = new QLabel(parentWidget);
         newItem->widgetLabel->setSizePolicy(QSizePolicy(QSizePolicy::Ignored, QSizePolicy::Fixed));
@@ -283,7 +288,7 @@ void QtGroupBoxPropertyBrowserPrivate::propertyInserted(QtBrowserItem *index, Qt
     insertRow(layout, row);
     int span = 1;
     int col  = 1;
-    if (index->property ()->propertyName ().isEmpty ())
+    if (index->property ()->propertyName ().isEmpty () || !index->property ()->isPropertyNameVisible ())
     {
       span = 2;
       col  = 0;

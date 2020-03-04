@@ -91,6 +91,7 @@ public:
     bool isEnabled() const;
     bool isModified() const;
     bool isRequest() const;
+    bool isPropertyNameVisible() const;
 
     bool hasValue() const;
     QIcon valueIcon() const;
@@ -107,6 +108,7 @@ public:
     void setEnabled(bool enable);
     void setModified(bool modified);
     void setRequest(QStandardItem* requestInfo);
+    void setPropertyNameVisible(bool visible);
 
     void addSubProperty(QtProperty *property);
     void insertSubProperty(QtProperty *property, QtProperty *afterProperty);

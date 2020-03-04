@@ -59,6 +59,7 @@ public:
     QtPropertyPrivate(QtAbstractPropertyManager *manager)
         : m_enabled(true),
           m_modified(false),
+          m_propertyNameVisible(true),
           m_manager(manager) {}
     QtProperty *q_ptr;
 
@@ -73,6 +74,7 @@ public:
     QString m_name;
     bool m_enabled;
     bool m_modified;
+    bool m_propertyNameVisible;
     QSharedPointer<QStandardItem> m_request;
 
     QtAbstractPropertyManager * const m_manager;
@@ -301,6 +303,16 @@ bool QtProperty::isRequest () const
 }
 
 /*!
+Returns whether the property name is visible.
+
+\sa setPropertyNameVisible()
+*/
+bool QtProperty::isPropertyNameVisible() const
+{
+  return d_ptr->m_propertyNameVisible;
+}
+
+/*!
     Returns whether the property has a value.
 
     \sa QtAbstractPropertyManager::hasValue()
@@ -472,6 +484,20 @@ void QtProperty::setRequest (QStandardItem* request)
 
     d_ptr->m_request.reset (request);
     propertyChanged();
+}
+
+/*!
+Set the the property name is visible according to the passed \a visible value.
+
+\sa isPropertyNameVisible()
+*/
+void QtProperty::setPropertyNameVisible(bool visible)
+{
+  if (d_ptr->m_propertyNameVisible == visible)
+    return;
+
+  d_ptr->m_propertyNameVisible = visible;
+  propertyChanged();
 }
 
 /*!
