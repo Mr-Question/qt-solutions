@@ -301,7 +301,8 @@ void QtGroupBoxPropertyBrowserPrivate::propertyInserted(QtBrowserItem *index, Qt
     else
       span = 2;
 
-    layout->addWidget(newItem->label, row, 0, 1, span);
+    if (newItem->label)
+      layout->addWidget(newItem->label, row, 0, 1, span);
 
     m_itemToIndex[newItem] = index;
     m_indexToItem[index] = newItem;
