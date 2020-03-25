@@ -236,7 +236,9 @@ void QtGroupBoxPropertyBrowserPrivate::propertyInserted(QtBrowserItem *index, Qt
               }
               else
               {
-                parentItem->groupBox = new QGroupBox (w);
+                QGroupBox* groupBox = new QGroupBox (w);
+                groupBox->setTitle (parent->propertyName ());
+                parentItem->groupBox = groupBox;
               }
             }
 
@@ -444,13 +446,6 @@ void QtGroupBoxPropertyBrowserPrivate::updateItem(WidgetItem *item)
         QFont font = item->groupBox->font();
         font.setUnderline(property->isModified());
         item->groupBox->setFont(font);
-
-        QGroupBox* aGroupBoxWidget = qobject_cast<QGroupBox*> (item->groupBox);
-        if (aGroupBoxWidget != nullptr)
-        {
-          aGroupBoxWidget->setTitle (property->propertyName ());
-        }
-
         item->groupBox->setToolTip(property->toolTip());
         item->groupBox->setToolTipDuration (q_ptr->toolTipDuration());
         item->groupBox->setStatusTip(property->statusTip());
