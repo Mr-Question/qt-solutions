@@ -225,6 +225,7 @@ void QtGroupBoxPropertyBrowserPrivate::propertyInserted(QtBrowserItem *index, Qt
             if (parentItem->groupBox)
             {
               parentItem->widget = 0;
+              row -= 2;
             }
             else
             {
