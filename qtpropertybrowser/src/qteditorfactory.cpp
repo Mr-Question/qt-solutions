@@ -2090,6 +2090,7 @@ QWidget *QtEnumEditorFactory::createEditor(QtEnumPropertyManager *manager, QtPro
         QWidget *parent)
 {
     QComboBox *editor = d_ptr->createEditor(property, parent);
+    editor->setMaxVisibleItems (40);
     editor->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLengthWithIcon);
     editor->setMinimumContentsLength(1);
     editor->view()->setTextElideMode(Qt::ElideRight);
